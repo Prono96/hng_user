@@ -11,9 +11,27 @@ age: 26,
 bio: 'I am Promise Prince, the coolest backend developer ever'
 }
 
-app.get('/home', (req, res) => {
+app.get('/home', async(req, res) => {
   res.status(200).json(user);
 });
+
+
+// Post request 
+app.post('/home', (req, res) => {
+
+  let x = req.body.x;
+  let y = req.body.y;
+  const result1 = x * y
+
+  const user2 = {
+    slackUsername: "prinx96",
+    operation_type: "multiplication",
+    result: result1
+  }
+
+ res.status(200).json(user2);
+ console.log(user2);
+})
 
 
 // App to listen for a server 
