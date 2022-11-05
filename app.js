@@ -19,14 +19,29 @@ app.get('/home', async(req, res) => {
 // Post request 
 app.post('/home', (req, res) => {
 
-  let x = req.body.x;
-  let y = req.body.y;
-  const result1 = x * y
+  const details = {
+    operation_type: req.body.operation_type,
+    x : req.body.x,
+    y : req.body.y
+  }
+
+  const numeration = details.operation_type;
+
+  if (numeration == "addition") {
+    result = details.x + details.y;
+  } else if (numeration == "subtraction") {
+    result = details.x - details.y;
+  } else if (numeration == "multiplication") {
+    result = details.x * details.y;
+  } else if (numeration !== "addition" || "subtraction" || "multiplication") {
+    result = null;
+  }
+
 
   const user2 = {
-    slackUsername: "prinx96",
-    operation_type: "multiplication",
-    result: result1
+    slackUsername: user.slackUsername,
+    result,
+    operation_type: numeration 
   }
 
  res.status(200).json(user2);
